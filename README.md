@@ -3,7 +3,7 @@
 ## Description
 
 Tool designed to provide random user data using the format "user"|"city"|"phone".
-Data will be stored using CSV format.
+Data will be stored in the project's root path.
 
 ## Usage
 
@@ -15,7 +15,7 @@ python3 main.py
 
 - Number of outputs
 - Name gender: "all", "male", "female"
-- File name
+- File name + extension
 
 ## knowledge
 
