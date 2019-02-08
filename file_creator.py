@@ -10,7 +10,7 @@ def valid_gender(selection):
 
 def get_phone():
     value = "6"
-    for i in range(9):
+    for i in range(8):
         value += str(int(random.random()*10))
     return value
 
