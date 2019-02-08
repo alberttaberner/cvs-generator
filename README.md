@@ -10,6 +10,11 @@ Data will be stored in the project's root path.
 ```
 python3 main.py
 ```
+or
+
+```
+python3 main.py filename num_of_generated_rows gender
+```
 
 ## Parameters
 
@@ -19,12 +24,12 @@ python3 main.py
 
 ## knowledge
 
-User list name taken from:
+U.S city names taken from:
 ```
 https://gist.github.com/norcal82/4accc0d968444859b408
 ```
 
-U.S city names taken from:
+User list name taken from:
 ```
 https://github.com/treyhunner/names/tree/master/names
 ```

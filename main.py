@@ -1,6 +1,9 @@
-import file_creator
+import file_creator as creator
+import sys
+import os.path
 
-def get_row(prompt):
+# Wait for manual number of rows insertion
+def ui_get_row(prompt):
     while True:
         try:
             value = int(input(prompt))
@@ -15,7 +18,8 @@ def get_row(prompt):
             break
     return value
 
-def get_gender(prompt):
+# Wait for gender selection
+def ui_get_gender(prompt):
     while True:
         try:
             value = str(input(prompt))
@@ -24,14 +28,15 @@ def get_gender(prompt):
             continue
 
         try:
-            idx = file_creator.get_gender_list().index(value)
+            idx = creator.get_gender_list().index(value)
             break
         except ValueError:
-            print('\nSelect a valid option: ' + ','.join(file_creator.get_gender_list()))
+            print('\nSelect a valid option: ' + ','.join(creator.get_gender_list()))
             continue
     return value
 
-def get_file_name(prompt):
+# Wait for filename insertion
+def ui_get_file_name(prompt):
     while True:
         try:
             value = str(input(prompt))
@@ -47,12 +52,45 @@ def get_file_name(prompt):
     return value
 
 def main():
+    args = len(sys.argv)
+    if args == 1:
+        required_rows = ui_get_row('\nHow many rows do you wish to generate?\n')
+        gender_type = ui_get_gender('\nWhich gender do you need for the name fields?\nOptions are: ' + ', '.join(creator.get_gender_list()) + "\n")
+        filename = ui_get_file_name('\nWhere do you want the data to be saved?\n')
 
-    required_rows = get_row('\nHow many rows do you wish to generate?\n')
-    gender_type = get_gender('\nWhich gender do you need for the name fields?\nOptions are: ' + ', '.join(file_creator.get_gender_list()) + "\n")
-    file_name = get_file_name('\nWhere do you want the data to be saved?\n')
+        creator.generate(required_rows, gender_type, filename)
 
-    file_creator.generate(required_rows, gender_type, file_name)
+    elif args == 4:
+        filename = sys.argv[1]
+        rows = sys.argv[2]
+        gender = sys.argv[3]
+
+        # Check if rows are a valid integer
+        try:
+            rows_int = int(rows)
+        except ValueError:
+            print("Invalid number of rows type.")
+            sys.exit(1)
+
+        if(len(filename) == 0):
+            print("Invalid filename.")
+        elif(rows_int == 0):
+            print("Invalid number of rows.")
+        elif not(creator.valid_gender(gender)):
+            print(
+            "Invalid gender.\n"
+            'Available genders are: ' + ', '.join(creator.get_gender_list())
+            )
+        else:
+            creator.generate(rows_int, gender, filename)
+
+    else:
+        print (
+        'Invalid arguments. Try one of the following commands:\n'
+        '   \'python '+__file__+'\n'
+        '   \'python '+__file__+' filename rows_to_generate gender_type\'.\n'
+        'Available genders are: ' + ', '.join(creator.get_gender_list())
+        )
 
 if __name__ == "__main__":
     main()

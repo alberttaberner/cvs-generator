@@ -5,6 +5,9 @@ import random
 def get_gender_list():
     return ["all", "male", "female"]
 
+def valid_gender(selection):
+    return (selection in get_gender_list())
+
 def get_phone():
     value = "6"
     for i in range(9):
@@ -19,10 +22,11 @@ def generate(rows, gender, file):
 
     #[0] Load lists
     names_list = []
+    all_gender = get_gender_list()[0]
 
-    if(gender == get_gender_list()[0] or gender == get_gender_list()[1]):
+    if(gender == all_gender or gender == get_gender_list()[1]):
         names_list.extend(file_loader.get_items('data/dist.male.first'))
-    if(gender == get_gender_list()[0] or gender == get_gender_list()[2]):
+    if(gender == all_gender or gender == get_gender_list()[2]):
         names_list.extend(file_loader.get_items('data/dist.female.first'))
 
     last_list = file_loader.get_items('data/dist.all.last')
@@ -30,10 +34,12 @@ def generate(rows, gender, file):
     #[1] Load lists
 
     # Prepare counters
-    name_counter = len(names_list)
-    last_counter = len(last_list)
-    cities_counter = len(cities_list)
+    # Discard last rows (POSIX 3.206 definition : A sequence of zero or more non- <newline> characters plus a terminating <newline> character.)
+    name_counter = len(names_list) - 1
+    last_counter = len(last_list) - 1
+    cities_counter = len(cities_list) - 1
 
+    # Attention: Overwrite existing file
     f = open(file, 'w+')
 
     for i in range(rows + 1):
