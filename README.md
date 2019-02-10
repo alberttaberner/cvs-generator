@@ -16,7 +16,7 @@ or
 python3 main.py filename num_of_generated_rows gender
 ```
 
-## Parameters
+### Parameters
 
 - Number of outputs
 - Name gender: "all", "male", "female"
