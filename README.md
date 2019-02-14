@@ -7,13 +7,14 @@ Data will be stored in the project's root path.
 
 ## Usage
 
+You will need python 3.
 ```
-python3 main.py
+python main.py
 ```
 or
 
 ```
-python3 main.py filename num_of_generated_rows gender
+python main.py [filename] [num_of_generated_rows] [gender]
 ```
 
 ### Parameters
@@ -22,7 +23,7 @@ python3 main.py filename num_of_generated_rows gender
 - Name gender: "all", "male", "female"
 - File name + extension
 
-## knowledge
+## Knowledge
 
 U.S city names taken from:
 ```
@@ -34,7 +35,7 @@ User list name taken from:
 https://github.com/treyhunner/names/tree/master/names
 ```
 
-## License (stolen btw)
+## License (whoever write this, thanks!)
 
 I don't claim this software is good for anything. If you think it is, cool. If it doesn't work, that's too bad.
 If you lose a million because it crashes, it's you that loses a million, not I. If you don't like this disclaimer, that's too bad.
